@@ -1,0 +1,169 @@
+/* ------------------------------------------------------------------*/
+/* fonts
+/* ----------------------------------------------------------------- */
+@import url("academicons.min.css");
+@import url("fontawesome.min.css");
+@import url("fonts.css");
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+
+
+body {
+  font-family: 'open_sans_regular', sans-serif;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 30px;
+  color: #6d7783;
+  
+  -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* for 'em' and 'strong' tags, font-size and line-height should be same with
+the body tag due to rendering problems in some browsers */
+em { font: 15px/30px 'open_sans_italic', sans-serif; }
+strong, b { font: 15px/30px 'open_sans_bold', sans-serif; }
+small { font-size: 12px; line-height: inherit; }
+emb { font: 15px/30px 'open_sans_semibolditalic', sans-serif; }
+
+
+/* ------------------------------------------------------------------*/
+/* header
+/* ----------------------------------------------------------------- */
+#header{
+  background: #242435;
+  /*background: #343a40;*/
+  /*background: #352747;*/
+  /*background: #192e5b;*/
+  /*background: #314152;*/
+  color: #eee;
+  padding-left: 10em;
+}
+#header h1 {
+  color: white; 
+  font-family: 'Pacifico', cursive;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+#header h1 a {
+  text-decoration: none;
+  outline: 0;
+  color: inherit;
+}
+#header h6.section-title {
+  color: #eee;
+}
+#header .nav-pills > a {
+  font: 13px/32px 'open_sans_bold', sans-serif;
+  letter-spacing: 2px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+#header .nav-pills .nav-link.active {
+  background-color: white;
+  /*color: lightskyblue;*/
+  color: #9c27b0;
+  /*border-color: transparent transparent #f3f3f3;*/
+  /*border-bottom: 4px solid !important;*/
+  /*width: 128px;*/
+  text-align: center;
+}
+#header .nav-pills .nav-link {
+  /*border: 1px solid transparent;*/
+  border-radius: .25rem .25rem 0 0;
+  color: white;
+  /*width: 128px;*/
+  text-align: center;
+}
+
+/* ------------------------------------------------------------------*/
+/* content
+/* ----------------------------------------------------------------- */
+#content {
+  padding-left: 10em;
+  min-height: calc(70vh - 145px);     /* to fix footer at the bottom */
+}
+#content .container {
+  margin-top:96px; 
+  margin-bottom: 96px;
+}
+#content h3 {
+  font: 22px/25px 'open_sans_bold', sans-serif;
+  color: #3a3a3a;
+}
+#content h3 span {
+  font: 30px/25px 'roboto_bold', sans-serif;
+  /*color: red;*/
+  color: #f2a104;
+}
+#content h5 {
+  font: 16px/25px 'open_sans_bold', sans-serif;
+  font-weight: normal;
+  margin-bottom: -4px;
+  color: #3a3a3a;
+}
+#content p {
+  line-height: 30px;
+  color: #6d7783;
+}
+#content .info {
+  font: 15px/24px 'open_sans_regular', sans-serif;
+  color: #6d7783;
+  margin-bottom: 3px;
+  margin-top: 3px;
+}
+#content a, #content a:visited  { 
+  text-decoration: none;
+  outline: 0;
+  color: #9c27b0; 
+}
+
+
+/* ------------------------------------------------------------------*/
+/* footer
+/* ----------------------------------------------------------------- */
+footer { 
+  background-color: #f0f0f0;
+  height: 145px;
+}
+
+footer a, footer a:visited  { color: #3a3a3a }
+footer a:hover, footer a:focus { 
+  text-decoration: none;
+  outline: 0;
+}
+
+
+/* ------------------------------------------------------------------*/
+/* for mobile devices
+/* ----------------------------------------------------------------- */
+@media screen and (max-width: 768px) {
+  #header {
+    padding-left: 0;
+  }
+  #header .desktop {
+    display: none;
+  }
+  #header .nav-pills .nav-link.active {
+    background-color: transparent;
+    background-color: rgb(0,0,0,0.1);
+    color: #d9ac2a;
+    /*border-color: transparent transparent #f3f3f3;*/
+    /*border-bottom: 4px solid !important;*/
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+  }
+  #header .nav-pills .nav-link {
+    /*border: 1px solid transparent;*/
+    border-radius: 0;
+    color: white;
+    font-size: 16px;
+    width: 100%;
+  }
+  #content {
+    padding-left: 0.3em;
+  }
+  #content .container {
+    margin-top: 36px;
+  }
+}
