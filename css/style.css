@@ -69,7 +69,7 @@ emb { font: 15px/30px 'open_sans_semibolditalic', sans-serif; }
 }
 #header .nav-pills .nav-link {
   /*border: 1px solid transparent;*/
-  border-radius: .25rem .25rem 0 0;
+  border-radius: 0 0 0 0;
   color: white;
   /*width: 128px;*/
   text-align: center;
@@ -155,7 +155,7 @@ footer a:hover, footer a:focus {
   }
   #header .nav-pills .nav-link {
     /*border: 1px solid transparent;*/
-    border-radius: 0;
+    border-radius: 0 0 0 0;
     color: white;
     font-size: 16px;
     width: 100%;
