@@ -14,8 +14,8 @@ return module$node_modules$mathjs$lib$cjs$index.fraction("-1");
 if(cljs.core.truth_(module$node_modules$mathjs$lib$cjs$index.smaller(num,(0)))){
 return num;
 } else {
-var G__32932 = module$node_modules$mathjs$lib$cjs$index.fraction(module$node_modules$mathjs$lib$cjs$index.subtract(num.n,num.d),num.d);
-num = G__32932;
+var G__33038 = module$node_modules$mathjs$lib$cjs$index.fraction(module$node_modules$mathjs$lib$cjs$index.subtract(num.n,num.d),num.d);
+num = G__33038;
 continue;
 
 }
@@ -38,18 +38,18 @@ contactcalc.core.euclidean = (function contactcalc$core$euclidean(a,b){
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(a,(0))){
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(0),(1)], null);
 } else {
-var vec__32889 = (function (){var G__32892 = cljs.core.mod(b,a);
-var G__32893 = a;
-return (contactcalc.core.euclidean.cljs$core$IFn$_invoke$arity$2 ? contactcalc.core.euclidean.cljs$core$IFn$_invoke$arity$2(G__32892,G__32893) : contactcalc.core.euclidean.call(null,G__32892,G__32893));
+var vec__32995 = (function (){var G__32998 = cljs.core.mod(b,a);
+var G__32999 = a;
+return (contactcalc.core.euclidean.cljs$core$IFn$_invoke$arity$2 ? contactcalc.core.euclidean.cljs$core$IFn$_invoke$arity$2(G__32998,G__32999) : contactcalc.core.euclidean.call(null,G__32998,G__32999));
 })();
-var x = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__32889,(0),null);
-var y = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__32889,(1),null);
+var x = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__32995,(0),null);
+var y = cljs.core.nth.cljs$core$IFn$_invoke$arity$3(vec__32995,(1),null);
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(y - (module$node_modules$mathjs$lib$cjs$index.floor(module$node_modules$mathjs$lib$cjs$index.divide(b,a)) * x)),x], null);
 }
 });
 contactcalc.core.cfb_calc = (function contactcalc$core$cfb_calc(var_args){
-var G__32895 = arguments.length;
-switch (G__32895) {
+var G__33001 = arguments.length;
+switch (G__33001) {
 case 3:
 return contactcalc.core.cfb_calc.cljs$core$IFn$_invoke$arity$3((arguments[(0)]),(arguments[(1)]),(arguments[(2)]));
 
@@ -69,12 +69,12 @@ while(true){
 var floor = module$node_modules$mathjs$lib$cjs$index.floor(num);
 var now = Date.now();
 if(cljs.core.truth_(module$node_modules$mathjs$lib$cjs$index.largerEq(num,(0)))){
-var G__32934 = contactcalc.core.make_negative(num);
-var G__32935 = cljs.core.PersistentVector.EMPTY;
-var G__32936 = past;
-num = G__32934;
-vec = G__32935;
-past = G__32936;
+var G__33040 = contactcalc.core.make_negative(num);
+var G__33041 = cljs.core.PersistentVector.EMPTY;
+var G__33042 = past;
+num = G__33040;
+vec = G__33041;
+past = G__33042;
 continue;
 } else {
 if(cljs.core.truth_(module$node_modules$mathjs$lib$cjs$index.equal(floor,num))){
@@ -83,12 +83,12 @@ return cljs.core.conj.cljs$core$IFn$_invoke$arity$2(vec,floor);
 if(((now - past) > (3000))){
 throw (new Error("timeout"));
 } else {
-var G__32937 = module$node_modules$mathjs$lib$cjs$index.divide((1),module$node_modules$mathjs$lib$cjs$index.subtract(floor,num));
-var G__32938 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(vec,floor);
-var G__32939 = past;
-num = G__32937;
-vec = G__32938;
-past = G__32939;
+var G__33043 = module$node_modules$mathjs$lib$cjs$index.divide((1),module$node_modules$mathjs$lib$cjs$index.subtract(floor,num));
+var G__33044 = cljs.core.conj.cljs$core$IFn$_invoke$arity$2(vec,floor);
+var G__33045 = past;
+num = G__33043;
+vec = G__33044;
+past = G__33045;
 continue;
 }
 
@@ -107,20 +107,20 @@ return contactcalc.core.cfb_calc.cljs$core$IFn$_invoke$arity$3(num,cljs.core.Per
 contactcalc.core.solid_torus = (function contactcalc$core$solid_torus(meridian,dividing,past){
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(dividing,"inf")){
 var lst = contactcalc.core.cfb_calc.cljs$core$IFn$_invoke$arity$2(contactcalc.core.make_small(meridian).inverse().neg(),past);
-return module$node_modules$mathjs$lib$cjs$index.abs(cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(module$node_modules$mathjs$lib$cjs$index.multiply,cljs.core.first(lst),cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__32896_SHARP_){
-return module$node_modules$mathjs$lib$cjs$index.add(p1__32896_SHARP_,(1));
+return module$node_modules$mathjs$lib$cjs$index.abs(cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(module$node_modules$mathjs$lib$cjs$index.multiply,cljs.core.first(lst),cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__33002_SHARP_){
+return module$node_modules$mathjs$lib$cjs$index.add(p1__33002_SHARP_,(1));
 }),cljs.core.rest(lst))));
 } else {
 if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(meridian,"inf")){
 var lst = contactcalc.core.cfb_calc.cljs$core$IFn$_invoke$arity$2(contactcalc.core.make_negative(dividing).inverse(),past);
-return module$node_modules$mathjs$lib$cjs$index.abs(cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(module$node_modules$mathjs$lib$cjs$index.multiply,cljs.core.first(lst),cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__32897_SHARP_){
-return module$node_modules$mathjs$lib$cjs$index.add(p1__32897_SHARP_,(1));
+return module$node_modules$mathjs$lib$cjs$index.abs(cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(module$node_modules$mathjs$lib$cjs$index.multiply,cljs.core.first(lst),cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__33003_SHARP_){
+return module$node_modules$mathjs$lib$cjs$index.add(p1__33003_SHARP_,(1));
 }),cljs.core.rest(lst))));
 } else {
-var G__32898 = module$node_modules$mathjs$lib$cjs$index.subtract(dividing,meridian).inverse();
-var G__32899 = "inf";
-var G__32900 = past;
-return (contactcalc.core.solid_torus.cljs$core$IFn$_invoke$arity$3 ? contactcalc.core.solid_torus.cljs$core$IFn$_invoke$arity$3(G__32898,G__32899,G__32900) : contactcalc.core.solid_torus.call(null,G__32898,G__32899,G__32900));
+var G__33004 = module$node_modules$mathjs$lib$cjs$index.subtract(dividing,meridian).inverse();
+var G__33005 = "inf";
+var G__33006 = past;
+return (contactcalc.core.solid_torus.cljs$core$IFn$_invoke$arity$3 ? contactcalc.core.solid_torus.cljs$core$IFn$_invoke$arity$3(G__33004,G__33005,G__33006) : contactcalc.core.solid_torus.call(null,G__33004,G__33005,G__33006));
 
 }
 }
@@ -158,26 +158,26 @@ return and__4149__auto__;
 }
 }
 })())){
-return "non known yet.";
+return "not known yet.";
 } else {
 if(cljs.core.truth_(module$node_modules$mathjs$lib$cjs$index.larger(num,(0)))){
 var lst = contactcalc.core.cfb_calc.cljs$core$IFn$_invoke$arity$2(contactcalc.core.make_small(num).inverse().neg(),past);
-return cljs.core.str.cljs$core$IFn$_invoke$arity$1(module$node_modules$mathjs$lib$cjs$index.multiply((2),module$node_modules$mathjs$lib$cjs$index.abs(cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(module$node_modules$mathjs$lib$cjs$index.multiply,cljs.core.first(lst),cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__32901_SHARP_){
-return module$node_modules$mathjs$lib$cjs$index.add(p1__32901_SHARP_,(1));
+return cljs.core.str.cljs$core$IFn$_invoke$arity$1(module$node_modules$mathjs$lib$cjs$index.multiply((2),module$node_modules$mathjs$lib$cjs$index.abs(cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(module$node_modules$mathjs$lib$cjs$index.multiply,cljs.core.first(lst),cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__33007_SHARP_){
+return module$node_modules$mathjs$lib$cjs$index.add(p1__33007_SHARP_,(1));
 }),cljs.core.rest(lst))))));
 } else {
 if(cljs.core.truth_(module$node_modules$mathjs$lib$cjs$index.smaller(num,(-4)))){
 var lst1 = contactcalc.core.cfb_calc.cljs$core$IFn$_invoke$arity$2(contactcalc.core.make_small(num).inverse().neg(),past);
 var lst2 = contactcalc.core.cfb_calc.cljs$core$IFn$_invoke$arity$2(module$node_modules$mathjs$lib$cjs$index.add(num,(3)),past);
-return cljs.core.str.cljs$core$IFn$_invoke$arity$1(module$node_modules$mathjs$lib$cjs$index.add(module$node_modules$mathjs$lib$cjs$index.abs(cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(module$node_modules$mathjs$lib$cjs$index.multiply,cljs.core.first(lst1),cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__32902_SHARP_){
-return module$node_modules$mathjs$lib$cjs$index.add(p1__32902_SHARP_,(1));
-}),cljs.core.rest(lst1)))),module$node_modules$mathjs$lib$cjs$index.abs(cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(module$node_modules$mathjs$lib$cjs$index.multiply,cljs.core.first(lst2),cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__32903_SHARP_){
-return module$node_modules$mathjs$lib$cjs$index.add(p1__32903_SHARP_,(1));
+return cljs.core.str.cljs$core$IFn$_invoke$arity$1(module$node_modules$mathjs$lib$cjs$index.add(module$node_modules$mathjs$lib$cjs$index.abs(cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(module$node_modules$mathjs$lib$cjs$index.multiply,cljs.core.first(lst1),cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__33008_SHARP_){
+return module$node_modules$mathjs$lib$cjs$index.add(p1__33008_SHARP_,(1));
+}),cljs.core.rest(lst1)))),module$node_modules$mathjs$lib$cjs$index.abs(cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(module$node_modules$mathjs$lib$cjs$index.multiply,cljs.core.first(lst2),cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__33009_SHARP_){
+return module$node_modules$mathjs$lib$cjs$index.add(p1__33009_SHARP_,(1));
 }),cljs.core.rest(lst2))))));
 } else {
 var lst = contactcalc.core.cfb_calc.cljs$core$IFn$_invoke$arity$2(contactcalc.core.make_small(num).inverse().neg(),past);
-return cljs.core.str.cljs$core$IFn$_invoke$arity$1(module$node_modules$mathjs$lib$cjs$index.abs(cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(module$node_modules$mathjs$lib$cjs$index.multiply,cljs.core.first(lst),cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__32904_SHARP_){
-return module$node_modules$mathjs$lib$cjs$index.add(p1__32904_SHARP_,(1));
+return cljs.core.str.cljs$core$IFn$_invoke$arity$1(module$node_modules$mathjs$lib$cjs$index.abs(cljs.core.reduce.cljs$core$IFn$_invoke$arity$3(module$node_modules$mathjs$lib$cjs$index.multiply,cljs.core.first(lst),cljs.core.map.cljs$core$IFn$_invoke$arity$2((function (p1__33010_SHARP_){
+return module$node_modules$mathjs$lib$cjs$index.add(p1__33010_SHARP_,(1));
 }),cljs.core.rest(lst)))));
 
 }
@@ -202,39 +202,39 @@ var past = Date.now();
 try{if(cljs.core.deref(draw_QMARK_) === false){
 return null;
 } else {
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var fexpr__32906 = cljs.core.deref(contact_data);
-return (fexpr__32906.cljs$core$IFn$_invoke$arity$1 ? fexpr__32906.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"category","category",-593092832)) : fexpr__32906.call(null,new cljs.core.Keyword(null,"category","category",-593092832)));
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var fexpr__33012 = cljs.core.deref(contact_data);
+return (fexpr__33012.cljs$core$IFn$_invoke$arity$1 ? fexpr__33012.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"category","category",-593092832)) : fexpr__33012.call(null,new cljs.core.Keyword(null,"category","category",-593092832)));
 })(),"figure8")){
-return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),"The number of tight contact structure is ",contactcalc.core.f8_calc(module$node_modules$mathjs$lib$cjs$index.fraction((function (){var fexpr__32907 = cljs.core.deref(contact_data);
-return (fexpr__32907.cljs$core$IFn$_invoke$arity$1 ? fexpr__32907.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"value","value",305978217)) : fexpr__32907.call(null,new cljs.core.Keyword(null,"value","value",305978217)));
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),"The number of tight contact structure is ",contactcalc.core.f8_calc(module$node_modules$mathjs$lib$cjs$index.fraction((function (){var fexpr__33013 = cljs.core.deref(contact_data);
+return (fexpr__33013.cljs$core$IFn$_invoke$arity$1 ? fexpr__33013.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"value","value",305978217)) : fexpr__33013.call(null,new cljs.core.Keyword(null,"value","value",305978217)));
 })()),past)], null);
 } else {
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var fexpr__32908 = cljs.core.deref(contact_data);
-return (fexpr__32908.cljs$core$IFn$_invoke$arity$1 ? fexpr__32908.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"category","category",-593092832)) : fexpr__32908.call(null,new cljs.core.Keyword(null,"category","category",-593092832)));
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var fexpr__33014 = cljs.core.deref(contact_data);
+return (fexpr__33014.cljs$core$IFn$_invoke$arity$1 ? fexpr__33014.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"category","category",-593092832)) : fexpr__33014.call(null,new cljs.core.Keyword(null,"category","category",-593092832)));
 })(),"whitehead")){
-return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),"The number of tight contact structure is ",contactcalc.core.whitehead_calc(module$node_modules$mathjs$lib$cjs$index.fraction((function (){var fexpr__32909 = cljs.core.deref(contact_data);
-return (fexpr__32909.cljs$core$IFn$_invoke$arity$1 ? fexpr__32909.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"value","value",305978217)) : fexpr__32909.call(null,new cljs.core.Keyword(null,"value","value",305978217)));
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),"The number of tight contact structure is ",contactcalc.core.whitehead_calc(module$node_modules$mathjs$lib$cjs$index.fraction((function (){var fexpr__33015 = cljs.core.deref(contact_data);
+return (fexpr__33015.cljs$core$IFn$_invoke$arity$1 ? fexpr__33015.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"value","value",305978217)) : fexpr__33015.call(null,new cljs.core.Keyword(null,"value","value",305978217)));
 })()),past)], null);
 } else {
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var fexpr__32910 = cljs.core.deref(contact_data);
-return (fexpr__32910.cljs$core$IFn$_invoke$arity$1 ? fexpr__32910.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"category","category",-593092832)) : fexpr__32910.call(null,new cljs.core.Keyword(null,"category","category",-593092832)));
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var fexpr__33016 = cljs.core.deref(contact_data);
+return (fexpr__33016.cljs$core$IFn$_invoke$arity$1 ? fexpr__33016.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"category","category",-593092832)) : fexpr__33016.call(null,new cljs.core.Keyword(null,"category","category",-593092832)));
 })(),"lens")){
-return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),"The number of tight contact structure is ",contactcalc.core.lens_calc(module$node_modules$mathjs$lib$cjs$index.fraction((function (){var fexpr__32911 = cljs.core.deref(contact_data);
-return (fexpr__32911.cljs$core$IFn$_invoke$arity$1 ? fexpr__32911.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"value","value",305978217)) : fexpr__32911.call(null,new cljs.core.Keyword(null,"value","value",305978217)));
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),"The number of tight contact structure is ",contactcalc.core.lens_calc(module$node_modules$mathjs$lib$cjs$index.fraction((function (){var fexpr__33017 = cljs.core.deref(contact_data);
+return (fexpr__33017.cljs$core$IFn$_invoke$arity$1 ? fexpr__33017.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"value","value",305978217)) : fexpr__33017.call(null,new cljs.core.Keyword(null,"value","value",305978217)));
 })()))], null);
 } else {
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var fexpr__32912 = cljs.core.deref(contact_data);
-return (fexpr__32912.cljs$core$IFn$_invoke$arity$1 ? fexpr__32912.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"category","category",-593092832)) : fexpr__32912.call(null,new cljs.core.Keyword(null,"category","category",-593092832)));
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var fexpr__33018 = cljs.core.deref(contact_data);
+return (fexpr__33018.cljs$core$IFn$_invoke$arity$1 ? fexpr__33018.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"category","category",-593092832)) : fexpr__33018.call(null,new cljs.core.Keyword(null,"category","category",-593092832)));
 })(),"sfs")){
-return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),"The number of tight contact structure is ",contactcalc.core.sfs_calc(module$node_modules$mathjs$lib$cjs$index.fraction((function (){var fexpr__32913 = cljs.core.deref(contact_data);
-return (fexpr__32913.cljs$core$IFn$_invoke$arity$1 ? fexpr__32913.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"value","value",305978217)) : fexpr__32913.call(null,new cljs.core.Keyword(null,"value","value",305978217)));
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),"The number of tight contact structure is ",contactcalc.core.sfs_calc(module$node_modules$mathjs$lib$cjs$index.fraction((function (){var fexpr__33019 = cljs.core.deref(contact_data);
+return (fexpr__33019.cljs$core$IFn$_invoke$arity$1 ? fexpr__33019.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"value","value",305978217)) : fexpr__33019.call(null,new cljs.core.Keyword(null,"value","value",305978217)));
 })()))], null);
 } else {
-if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var fexpr__32914 = cljs.core.deref(contact_data);
-return (fexpr__32914.cljs$core$IFn$_invoke$arity$1 ? fexpr__32914.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"category","category",-593092832)) : fexpr__32914.call(null,new cljs.core.Keyword(null,"category","category",-593092832)));
+if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2((function (){var fexpr__33020 = cljs.core.deref(contact_data);
+return (fexpr__33020.cljs$core$IFn$_invoke$arity$1 ? fexpr__33020.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"category","category",-593092832)) : fexpr__33020.call(null,new cljs.core.Keyword(null,"category","category",-593092832)));
 })(),"solid")){
-return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),"The number of tight contact structure is ",contactcalc.core.solid_calc(module$node_modules$mathjs$lib$cjs$index.fraction((function (){var fexpr__32915 = cljs.core.deref(contact_data);
-return (fexpr__32915.cljs$core$IFn$_invoke$arity$1 ? fexpr__32915.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"value","value",305978217)) : fexpr__32915.call(null,new cljs.core.Keyword(null,"value","value",305978217)));
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),"The number of tight contact structure is ",contactcalc.core.solid_calc(module$node_modules$mathjs$lib$cjs$index.fraction((function (){var fexpr__33021 = cljs.core.deref(contact_data);
+return (fexpr__33021.cljs$core$IFn$_invoke$arity$1 ? fexpr__33021.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"value","value",305978217)) : fexpr__33021.call(null,new cljs.core.Keyword(null,"value","value",305978217)));
 })()))], null);
 } else {
 return cljs.core.val;
@@ -245,20 +245,20 @@ return cljs.core.val;
 }
 }
 }
-}catch (e32905){if((e32905 instanceof Error)){
-var e = e32905;
+}catch (e33011){if((e33011 instanceof Error)){
+var e = e33011;
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),"Sorry, it takes too much time.. or"], null);
 } else {
-throw e32905;
+throw e33011;
 
 }
 }});
 contactcalc.core.diagram_component = (function contactcalc$core$diagram_component(contact_data,draw_QMARK_){
-try{var coeff = module$node_modules$mathjs$lib$cjs$index.fraction((function (){var fexpr__32917 = cljs.core.deref(contact_data);
-return (fexpr__32917.cljs$core$IFn$_invoke$arity$1 ? fexpr__32917.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"value","value",305978217)) : fexpr__32917.call(null,new cljs.core.Keyword(null,"value","value",305978217)));
+try{var coeff = module$node_modules$mathjs$lib$cjs$index.fraction((function (){var fexpr__33023 = cljs.core.deref(contact_data);
+return (fexpr__33023.cljs$core$IFn$_invoke$arity$1 ? fexpr__33023.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"value","value",305978217)) : fexpr__33023.call(null,new cljs.core.Keyword(null,"value","value",305978217)));
 })());
-var cat = (function (){var fexpr__32918 = cljs.core.deref(contact_data);
-return (fexpr__32918.cljs$core$IFn$_invoke$arity$1 ? fexpr__32918.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"category","category",-593092832)) : fexpr__32918.call(null,new cljs.core.Keyword(null,"category","category",-593092832)));
+var cat = (function (){var fexpr__33024 = cljs.core.deref(contact_data);
+return (fexpr__33024.cljs$core$IFn$_invoke$arity$1 ? fexpr__33024.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"category","category",-593092832)) : fexpr__33024.call(null,new cljs.core.Keyword(null,"category","category",-593092832)));
 })();
 if(cljs.core.deref(draw_QMARK_) === false){
 return null;
@@ -306,39 +306,39 @@ return null;
 }
 }
 }
-}catch (e32916){if((e32916 instanceof Error)){
-var e = e32916;
+}catch (e33022){if((e33022 instanceof Error)){
+var e = e33022;
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"p","p",151049309),"invalid input"], null);
 } else {
-throw e32916;
+throw e33022;
 
 }
 }});
 contactcalc.core.temp_select = (function contactcalc$core$temp_select(contact_data,draw_QMARK_){
-return new cljs.core.PersistentVector(null, 7, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"select","select",1147833503),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__32919_SHARP_){
-var G__32922 = cljs.core.reset_BANG_(draw_QMARK_,false);
-var fexpr__32921 = cljs.core.reset_BANG_(contact_data,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"value","value",305978217),(function (){var fexpr__32923 = cljs.core.deref(contact_data);
-return (fexpr__32923.cljs$core$IFn$_invoke$arity$1 ? fexpr__32923.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"value","value",305978217)) : fexpr__32923.call(null,new cljs.core.Keyword(null,"value","value",305978217)));
-})(),new cljs.core.Keyword(null,"category","category",-593092832),p1__32919_SHARP_.target.value], null));
-return (fexpr__32921.cljs$core$IFn$_invoke$arity$1 ? fexpr__32921.cljs$core$IFn$_invoke$arity$1(G__32922) : fexpr__32921.call(null,G__32922));
+return new cljs.core.PersistentVector(null, 7, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"select","select",1147833503),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__33025_SHARP_){
+var G__33028 = cljs.core.reset_BANG_(draw_QMARK_,false);
+var fexpr__33027 = cljs.core.reset_BANG_(contact_data,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"value","value",305978217),(function (){var fexpr__33029 = cljs.core.deref(contact_data);
+return (fexpr__33029.cljs$core$IFn$_invoke$arity$1 ? fexpr__33029.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"value","value",305978217)) : fexpr__33029.call(null,new cljs.core.Keyword(null,"value","value",305978217)));
+})(),new cljs.core.Keyword(null,"category","category",-593092832),p1__33025_SHARP_.target.value], null));
+return (fexpr__33027.cljs$core$IFn$_invoke$arity$1 ? fexpr__33027.cljs$core$IFn$_invoke$arity$1(G__33028) : fexpr__33027.call(null,G__33028));
 })], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"figure8"], null),"Surgeries on the figure-8 knot"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"whitehead"], null),"Surgeries on the Whitehead link"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"sfs"], null),"Small Seifert fibrations"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"lens"], null),"Lens spaces"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"option","option",65132272),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"value","value",305978217),"solid"], null),"solid tori"], null)], null);
 });
 contactcalc.core.contact_form = (function contactcalc$core$contact_form(val,contact_data,draw_QMARK_){
-return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"form","form",-1624062471),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-submit","on-submit",1227871159),(function (p1__32924_SHARP_){
-var G__32927 = cljs.core.reset_BANG_(contact_data,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"value","value",305978217),cljs.core.deref(val),new cljs.core.Keyword(null,"category","category",-593092832),(function (){var fexpr__32930 = cljs.core.deref(contact_data);
-return (fexpr__32930.cljs$core$IFn$_invoke$arity$1 ? fexpr__32930.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"category","category",-593092832)) : fexpr__32930.call(null,new cljs.core.Keyword(null,"category","category",-593092832)));
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"form","form",-1624062471),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-submit","on-submit",1227871159),(function (p1__33030_SHARP_){
+var G__33033 = cljs.core.reset_BANG_(contact_data,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"value","value",305978217),cljs.core.deref(val),new cljs.core.Keyword(null,"category","category",-593092832),(function (){var fexpr__33036 = cljs.core.deref(contact_data);
+return (fexpr__33036.cljs$core$IFn$_invoke$arity$1 ? fexpr__33036.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"category","category",-593092832)) : fexpr__33036.call(null,new cljs.core.Keyword(null,"category","category",-593092832)));
 })()], null));
-var G__32928 = cljs.core.reset_BANG_(val,"");
-var G__32929 = cljs.core.reset_BANG_(draw_QMARK_,true);
-var fexpr__32926 = p1__32924_SHARP_.preventDefault();
-return (fexpr__32926.cljs$core$IFn$_invoke$arity$3 ? fexpr__32926.cljs$core$IFn$_invoke$arity$3(G__32927,G__32928,G__32929) : fexpr__32926.call(null,G__32927,G__32928,G__32929));
-})], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"input","input",556931961),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"type","type",1174270348),"text",new cljs.core.Keyword(null,"value","value",305978217),cljs.core.deref(val),new cljs.core.Keyword(null,"placeholder","placeholder",-104873083),"Type a surgery coefficient",new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__32925_SHARP_){
-return cljs.core.reset_BANG_(val,p1__32925_SHARP_.target.value);
+var G__33034 = cljs.core.reset_BANG_(val,"");
+var G__33035 = cljs.core.reset_BANG_(draw_QMARK_,true);
+var fexpr__33032 = p1__33030_SHARP_.preventDefault();
+return (fexpr__33032.cljs$core$IFn$_invoke$arity$3 ? fexpr__33032.cljs$core$IFn$_invoke$arity$3(G__33033,G__33034,G__33035) : fexpr__33032.call(null,G__33033,G__33034,G__33035));
+})], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"input","input",556931961),new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"type","type",1174270348),"text",new cljs.core.Keyword(null,"value","value",305978217),cljs.core.deref(val),new cljs.core.Keyword(null,"placeholder","placeholder",-104873083),"Type a surgery coefficient",new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__33031_SHARP_){
+return cljs.core.reset_BANG_(val,p1__33031_SHARP_.target.value);
 })], null)], null)], null);
 });
 contactcalc.core.references = (function contactcalc$core$references(contact_data,draw_QMARK_){
-var cat = (function (){var fexpr__32931 = cljs.core.deref(contact_data);
-return (fexpr__32931.cljs$core$IFn$_invoke$arity$1 ? fexpr__32931.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"category","category",-593092832)) : fexpr__32931.call(null,new cljs.core.Keyword(null,"category","category",-593092832)));
+var cat = (function (){var fexpr__33037 = cljs.core.deref(contact_data);
+return (fexpr__33037.cljs$core$IFn$_invoke$arity$1 ? fexpr__33037.cljs$core$IFn$_invoke$arity$1(new cljs.core.Keyword(null,"category","category",-593092832)) : fexpr__33037.call(null,new cljs.core.Keyword(null,"category","category",-593092832)));
 })();
 if(cljs.core.deref(draw_QMARK_) === false){
 return null;
