@@ -26,7 +26,7 @@ em { font: 15px/30px 'open_sans_italic', sans-serif; }
 strong, b { font: 15px/30px 'open_sans_bold', sans-serif; }
 small { font-size: 12px; line-height: inherit; }
 emb { font: 15px/30px 'open_sans_semibolditalic', sans-serif; }
-
+sb { font: 15px/30px 'open_sans_semibold', sans-serif; }
 
 /* ------------------------------------------------------------------*/
 /* header
