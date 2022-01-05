@@ -97,6 +97,10 @@ sb { font: 15px/30px 'open_sans_semibold', sans-serif; }
   /*color: red;*/
   color: #f2a104;
 }
+#content h4 {
+  font: 18px/25px 'open_sans_bold', sans-serif;
+  color: #3a3a3a;
+}
 #content h5 {
   font: 16px/25px 'open_sans_bold', sans-serif;
   font-weight: normal;
