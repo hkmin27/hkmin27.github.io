@@ -1,0 +1,21 @@
+{
+  "grammarly.overrides": [
+    {
+      "files": [
+        "**/hkmin27.github.io/contents/cv/cv.tex"
+      ],
+      "config": {
+        "audience": "knowledgeable",
+        "dialect": "american",
+        "domain": "academic",
+        "emotions": [
+          "neutral"
+        ],
+        "goals": [
+          "inform",
+          "describe"
+        ]
+      }
+    }
+  ]
+}
