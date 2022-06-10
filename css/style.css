@@ -10,8 +10,8 @@
 body {
   font-family: 'open_sans_regular', sans-serif;
   font-weight: normal;
-  font-size: 15px;
-  line-height: 30px;
+  font-size: 13px;
+  line-height: 28px;
   color: #6d7783;
   
   -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
@@ -22,11 +22,11 @@ body {
 
 /* for 'em' and 'strong' tags, font-size and line-height should be same with
 the body tag due to rendering problems in some browsers */
-em { font: 15px/30px 'open_sans_italic', sans-serif; }
-strong, b { font: 15px/30px 'open_sans_bold', sans-serif; }
-small { font-size: 12px; line-height: inherit; }
-emb { font: 15px/30px 'open_sans_semibolditalic', sans-serif; }
-sb { font: 15px/30px 'open_sans_semibold', sans-serif; }
+em { font: 13px/26px 'open_sans_italic', sans-serif; }
+strong, b { font: 13px/26px 'open_sans_bold', sans-serif; }
+small { font-size: 10px; line-height: inherit; }
+emb { font: 13px/26px 'open_sans_semibolditalic', sans-serif; }
+sb { font: 13px/26px 'open_sans_semibold', sans-serif; }
 
 /* ------------------------------------------------------------------*/
 /* header
@@ -89,30 +89,30 @@ sb { font: 15px/30px 'open_sans_semibold', sans-serif; }
   margin-bottom: 96px;
 }
 #content h3 {
-  font: 22px/25px 'open_sans_bold', sans-serif;
+  font: 20px/22px 'open_sans_bold', sans-serif;
   color: #3a3a3a;
 }
 #content h3 span {
-  font: 30px/25px 'roboto_bold', sans-serif;
+  font: 28px/22px 'roboto_bold', sans-serif;
   /*color: red;*/
   color: #f2a104;
 }
 #content h4 {
-  font: 18px/25px 'open_sans_bold', sans-serif;
+  font: 16px/22px 'open_sans_bold', sans-serif;
   color: #3a3a3a;
 }
 #content h5 {
-  font: 16px/25px 'open_sans_bold', sans-serif;
+  font: 14px/22px 'open_sans_bold', sans-serif;
   font-weight: normal;
   margin-bottom: -4px;
   color: #3a3a3a;
 }
 #content p {
-  line-height: 30px;
+  line-height: 26px;
   color: #6d7783;
 }
 #content .info {
-  font: 15px/24px 'open_sans_regular', sans-serif;
+  font: 13px/20px 'open_sans_regular', sans-serif;
   color: #6d7783;
   margin-bottom: 3px;
   margin-top: 3px;
