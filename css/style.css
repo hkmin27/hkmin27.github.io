@@ -32,7 +32,8 @@ sb { font: 13px/26px 'open_sans_semibold', sans-serif; }
 /* header
 /* ----------------------------------------------------------------- */
 #header{
-  background: #242435;
+  background: #042c1e;
+  /*background: #242435;*/
   /*background: #343a40;*/
   /*background: #352747;*/
   /*background: #192e5b;*/
