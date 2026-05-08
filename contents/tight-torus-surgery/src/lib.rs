@@ -383,7 +383,7 @@ fn surgery_above_pq_1(qp: Fraction, r: Fraction) -> i64 {
 
 #[wasm_bindgen]
 pub fn surgery(p: i64, q: i64, a: i64, b: i64) -> Result<i64, JsValue> {
-    if p == 0 || q == 0 {
+    if gcd(p, q) != 1 {
         let msg = format!(" Enter a non-trivial torus knot!");
         return Err(JsValue::from_str(&msg));
     }
