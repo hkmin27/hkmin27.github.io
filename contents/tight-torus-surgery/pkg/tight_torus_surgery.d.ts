@@ -1,15 +1,16 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export function surgery(p: bigint, q: bigint, a: bigint, b: bigint): bigint;
+export function surgery(p: bigint, q: bigint, a: bigint, b: bigint): BigInt64Array;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
     readonly memory: WebAssembly.Memory;
-    readonly surgery: (a: bigint, b: bigint, c: bigint, d: bigint) => [bigint, number, number];
+    readonly surgery: (a: bigint, b: bigint, c: bigint, d: bigint) => [number, number, number, number];
     readonly __wbindgen_externrefs: WebAssembly.Table;
     readonly __externref_table_dealloc: (a: number) => void;
+    readonly __wbindgen_free: (a: number, b: number, c: number) => void;
     readonly __wbindgen_start: () => void;
 }
 

@@ -54,19 +54,29 @@
             const b = BigInt(document.getElementById('b').value);
 
             const result = surgery(p, q, a, b);
+            const non_loose = result[0];
+            const tight = result[1];
+            const non_thickenable = result[2];
+            const surgeries = non_loose + tight + non_thickenable;
 
             let statusText = "";
-            if (result === -1n) {
+            let statusText_nonloose ="";
+            let statusText_tight ="";
+            let statusText_non_thickenable ="";
+            if (surgeries === -1n) {
                 statusText = "infinity";
-            } else if (result === -2n) {
+            } else if (surgeries < 0n) {
                 statusText = "not implemented yet!";
             } else {
-                statusText = result.toString(); 
+                statusText = surgeries.toString(); 
+                statusText_nonloose = non_loose.toString();
+                statusText_tight = tight.toString();
+                statusText_non_thickenable = non_thickenable.toString();
             }
 
             const targetElement = document.getElementById('result');
             if (targetElement) {
-                targetElement.innerText = `(${p},${q})-torus knot, surgery coefficient: ${a}/${b}, tight contact structures: ${statusText}`;
+                targetElement.innerText = `(${p},${q})-torus knot, surgery coefficient: ${a}/${b}, tight contact structures: ${statusText}\n\t ${statusText_nonloose} from non_loose,\t ${statusText_tight} from tight,\t ${statusText_non_thickenable} from non_thickenable`;
             }
         } catch (e) {
             alert(e);

@@ -1,6 +1,5 @@
 use wasm_bindgen::prelude::*;
 use std::mem;
-
 #[derive(Debug, Clone, Copy)]
 struct Fraction {
     num: i64,        //q     
@@ -124,6 +123,14 @@ impl Fraction {
         }
     }
 
+    fn floor(&self) -> i64 {
+    if self.num >= 0 {
+        self.num / self.den
+    } else {
+        (self.num - self.den + 1) / self.den
+    }
+}
+
     // (num/den)^c
     fn clockwise(&self) -> Self {
         if self.num == 0 {
@@ -194,6 +201,70 @@ impl Fraction {
             Fraction::new(-f.num, f.den)
         }
     }
+
+    fn jumps(&self) -> Vec<Fraction> {
+        let cf = self.to_cf();
+        cf.jumps()
+    }
+
+    fn gaps(&self) -> Vec<i64> {
+        let jumps = self.jumps();
+
+        let valleys: Vec<Fraction> = jumps[..jumps.len()-1]
+            .windows(2)
+            .map(|pair| farey_sum(pair[0],  pair[1]))
+            .collect();
+
+        valleys.into_iter()
+            .map(|s| dot_product(*self, s).abs()) 
+            .collect() 
+    }
+
+    fn tight_gaps(&self) -> Vec<i64> {
+        let ceil = self.ceiling();
+        let floor = self.floor(); 
+
+        let jump_right = dot_product(*self, Fraction::new(ceil,1)).abs();
+        let jump_left = dot_product(*self, Fraction::new(floor,1)).abs();
+
+        let peaks = 2 * ceil.abs(); 
+        let n = (peaks - 1) as usize;
+
+        let gaps: Vec<i64> = [jump_right, jump_left].iter()
+            .cycle()        
+            .take(n)        
+            .cloned()       
+            .collect();     // 벡터로 수집
+        gaps
+    }
+
+    fn block_lengths(&self) -> Vec<i64> {
+        let mut jumps = self.jumps();
+        jumps.insert(0,*self);
+
+        let mut result: Vec<i64> = jumps.iter()          
+            .zip(jumps.iter().skip(2))              
+            .map(|(a, b)| dot_product(*a,*b).abs())                    
+            .collect();
+        result.push(self.ceiling().abs()-1);
+        result
+    }
+
+    fn peaks(&self) -> Vec<i64> {
+        let mut block_lengths = self.block_lengths();
+        let last = block_lengths.pop().unwrap(); // 마지막 원소를 뽑아냄 (재료)
+        let mut suffix_prod = last + 1;
+
+        let mut results: Vec<i64> = block_lengths.into_iter().rev()
+            .map(|x| {
+                let res = x * suffix_prod;
+                suffix_prod *= x + 1;
+                res
+            })
+            .collect();
+        results.reverse();
+        results
+    }
 }
 
 struct ContinuedFraction {
@@ -219,6 +290,62 @@ impl ContinuedFraction {
         num = -num.abs();
         den = den.abs();
         Fraction::new(num, den)
+    }
+
+    fn to_partial_f(&self, k: usize) -> Fraction {
+        if self.terms.is_empty() {
+            panic!("Cannot convert an empty ContinuedFraction to a Fraction!");
+        }
+        vec_to_f(&self.terms[0..k],0)
+    }
+
+    fn jumps(&self) -> Vec<Fraction> {
+        let n = self.terms.len();
+        let mut a_left: Vec<Fraction> = (1..n)
+            .rev()
+            .filter(|&i| i == 1 || self.terms[i] != -2) // Find the entry that is not -2
+            .map(|i| vec_to_f(&self.terms[0..i],0)) // Calculate fraction right before that entry 
+            .collect();
+
+        let mut b_right: Vec<Fraction> = (1..n)
+            .rev()
+            .filter(|&i| {i==1 || self.terms[i - 1] != -2})
+            .map(|i| vec_to_f(&self.terms[0..i], -1)) 
+            .collect();
+
+        if self.terms[n-1] != -2 {      // Start from A_1
+            let last_a = if a_left.len() > b_right.len() {
+                a_left.pop()
+            } else {
+                None
+            };
+
+            let mut combined: Vec<Fraction> = a_left.into_iter()
+                .zip(b_right.into_iter())
+                .flat_map(|(a, b)| [a, b])
+                .collect();
+
+            if let Some(extra) = last_a {
+                combined.push(extra)
+            }
+            combined 
+        } else {                         // Start from B_1
+            let last_b = if a_left.len() < b_right.len() {
+                b_right.pop()
+            } else {
+                None
+            };
+
+            let mut combined: Vec<Fraction> = b_right.into_iter()
+                .zip(a_left.into_iter())
+                .flat_map(|(b, a)| [b, a])
+                .collect();
+
+            if let Some(extra) = last_b {
+                combined.push(extra)
+            }
+            combined
+        }
     }
 }
 
@@ -272,6 +399,39 @@ fn dot_product(r: Fraction, s: Fraction) -> i64 {
     a * d  - b * c
 } 
 
+fn farey_sum(r: Fraction, s: Fraction) -> Fraction {
+    let (a, b) = (r.num, r.den);
+    let (c, d) = (s.num, s.den);
+
+    Fraction::new(a+c,b+d)
+}
+
+fn vec_to_f(terms: &[i64], n: i64) -> Fraction {
+    if terms.is_empty() {
+        panic!("Cannot convert an empty ContinuedFraction to a Fraction!");
+    } 
+
+    let mut num: i64 = 1;
+    let mut den: i64 = -n;
+
+    // inverse Euclidean algorithm
+    for &term in terms.iter().rev() {
+        let old_num = num;
+        num = term * num + den;
+        den = -old_num;
+    }
+    num = -num.abs();
+    den = den.abs();
+    Fraction::new(num, den)
+}
+
+fn fractions_to_tuples(v: Vec<Fraction>) -> Vec<(i64,i64)> {
+    let results = v.iter()
+        .map(|x| (x.num,x.den))
+        .collect();
+    results
+}
+
 // phi_infty(r), r = a/b
 fn phi_inf(r: Fraction) -> i64 {
     let (a, b) = (r.num, r.den);
@@ -309,9 +469,16 @@ fn phi_s(r: Fraction, s: Fraction) -> i64 {
 
 // tight contact structures
 // Theorem 1.2: r = a/b > pq
-fn surgery_above_pq(qp: Fraction, r: Fraction) -> i64 {
+fn surgery_above_pq(qp: Fraction, r: Fraction) -> (i64, i64, i64, Vec<Fraction>) {
     let (p, q) = (qp.den, qp.num);
     let (a, b) = (r.num, r.den);
+
+    let mut non_loose = 0;
+    let mut tight = 0;
+    let mut non_thickenable = 0;
+
+    let jumps = qp.jumps();
+
 
     // negative torus knots
     if q < 0 {
@@ -321,18 +488,22 @@ fn surgery_above_pq(qp: Fraction, r: Fraction) -> i64 {
 
             let n = Fraction::new(b, a).ceiling();
             if n <= 1 {         // a/b notin [0,1)
-                return qp.n() * phi_inf(r)
+                non_loose = qp.n() * phi_inf(r);
+                return (non_loose, tight, non_thickenable, jumps)
             } else {            // a/b in (0,1): add non-thickenable structures
                 let phi_total: i64 = (1..=(n-1))
                     .map(|k| phi_s(r, Fraction::new(1, k)))
                     .sum();
-                return qp.n() * phi_inf(r) + phi_total  
+                non_loose = qp.n() * phi_inf(r);
+                non_thickenable = phi_total;
+                return (non_loose, tight, non_thickenable, jumps)
             }
         }
 
         // non LHT
         if a == 0 {     // 0-surgery
-            return qp.n() * phi_inf(r)
+            non_loose = qp.n() * phi_inf(r);
+            return (non_loose, tight, non_thickenable, jumps)
         }
 
         // check whether a/b is in J_k = [e_k^a, e_k) for some k
@@ -341,7 +512,8 @@ fn surgery_above_pq(qp: Fraction, r: Fraction) -> i64 {
 
         // a/b < 0 or a/b > |pq|-|p|-|q| 
         if k <= 0 {
-            return qp.n() * phi_inf(r)
+            non_loose = qp.n() * phi_inf(r);
+            return (non_loose, tight, non_thickenable, jumps)
         }
 
         // e and k rel prime => non-thickenable 
@@ -351,38 +523,114 @@ fn surgery_above_pq(qp: Fraction, r: Fraction) -> i64 {
 
             // a/b in J_k
             if b * ea.num <= a * ea.den {       // e_k^a <= a/b
-                qp.n() * phi_inf(r) + phi_s(r, ek)
+                non_loose = qp.n() * phi_inf(r);
+                non_thickenable = phi_s(r, ek);
+                (non_loose, tight, non_thickenable, jumps)
+
             } else {
-                qp.n() * phi_inf(r)
+                non_loose = qp.n() * phi_inf(r);
+                (non_loose, tight, non_thickenable, jumps)
             }
         // e and k not rel prime, then no non-thickenable
         } else {                
-            qp.n() * phi_inf(r)
+            non_loose = qp.n() * phi_inf(r);
+            (non_loose, tight, non_thickenable, jumps)
         }
     // positive torus knots: easy
     } else {
-        qp.n() * phi_inf(r)
+        non_loose = qp.n() * phi_inf(r);
+        (non_loose, tight, non_thickenable, jumps)
     }
 }
 
 // Theorem 1.2: pq-1 <= r < pq
-fn surgery_above_pq_1(qp: Fraction, r: Fraction) -> i64 {
+fn surgery_above_pq_1(qp: Fraction, r: Fraction) -> (i64, i64, i64, Vec<Fraction>) {
     let (p, q) = (qp.den, qp.num);
 
     let m = qp.m();
     let n = qp.n();
 
-    let l = Fraction::new(p*q,1);
+    let s = Fraction::new(p*q,1);
 
-    (m - 2 * n) * phi_s(r, l) + n * phi_inf(r)
+    let mut non_loose = 0;
+    let tight = 0;
+    let non_thickenable = 0;
+    let jumps = qp.jumps();
+
+    non_loose = (m - 2 * n) * phi_s(r, s) + n * phi_inf(r);
+    (non_loose, tight, non_thickenable, jumps)
 }
 
-//fn surgery_below_pq_1(p: i64, q: i64, a: i64, b: i64) -> i64 {
-//    return -2
-//}
+fn surgery_below_pq(qp: Fraction, r: Fraction) -> (i64, i64, i64, Vec<Fraction>) {
+    let (p, q) = (qp.den, qp.num);
+
+    let m = qp.m();
+    let n = qp.n();
+
+    let ceil = r.ceiling();
+    let floor = r.floor();
+
+    let pq = p * q;
+    let rel_tb = pq - floor - 1;
+
+    let non_thickenable = 0;
+    let jumps = qp.jumps();
+
+    if q < 0 {      // negative torus knots
+        let peaks = qp.peaks();
+        let max_gaps = qp.gaps();
+        let mut gaps: Vec<i64> = max_gaps.iter()
+            .map(|x| ((x - rel_tb - 1) + (x-rel_tb - 1).abs()) / 2)
+            .collect(); 
+        gaps.insert(0,0);
+
+        let width: Vec<i64> = std::iter::once(1)           
+            .chain(max_gaps.iter().map(|&g| g))             
+            .collect();
+
+        let mut cumulative_width = 0;
+        let mut cumulative_gap = 0;
+        let len = peaks.len();
+
+        println!("width = {:?}, gaps = {:?}, peaks = {:?}", width, max_gaps, peaks);
+
+        let non_loose: i64 = peaks.iter().enumerate()
+            .map(|(i, &p_current)| {
+                cumulative_width += width[i];
+                cumulative_gap += gaps[i];
+
+                if i < len - 1 {
+                    let p_next = peaks[i + 1];
+                    (p_current - p_next) * (cumulative_width - cumulative_gap) * 2
+                } else {
+                    p_current * (cumulative_width - cumulative_gap) * 2
+                }
+            })
+            .sum();
+        
+        let tight_max_gaps = qp.tight_gaps();
+        let tight_initial_width = 1 + tight_max_gaps.iter().sum::<i64>();
+        let tight_gaps: i64 = tight_max_gaps.iter()
+            .map(|x| ((x - rel_tb - 1) + (x-rel_tb - 1).abs()) / 2)
+            .sum(); 
+
+        let tight_width = tight_initial_width + rel_tb;
+
+        let tight = tight_width - tight_gaps;
+
+        if r.den != 1 {
+            (non_loose * phi_s(r,Fraction::new(ceil,1)),tight * phi_s(r,Fraction::new(ceil,1)), non_thickenable, jumps) 
+        } else {
+            (non_loose - qp.n(), tight, non_thickenable, jumps) 
+        }
+    } else {       // positive torus knots
+        return (-2,-2,-2,vec![])
+    }
+}
+
 
 #[wasm_bindgen]
-pub fn surgery(p: i64, q: i64, a: i64, b: i64) -> Result<i64, JsValue> {
+pub fn surgery(p: i64, q: i64, a: i64, b: i64) -> Result<Vec<i64>, JsValue> {
     if gcd(p, q) != 1 {
         let msg = format!(" Enter a non-trivial torus knot!");
         return Err(JsValue::from_str(&msg));
@@ -402,18 +650,47 @@ pub fn surgery(p: i64, q: i64, a: i64, b: i64) -> Result<i64, JsValue> {
 
     // r = infinity => S^3
     if b == 0 {
-        Ok(1)
+        Ok( vec![0,1,0] )
     } // 0-surgery on trefoils
     else if (qp == Fraction::new_torus(3,2) || qp == Fraction::new_torus(-3,2)) && r==0 {
-        Ok(-1)
+        Ok( vec![-1,0,0] )
     } else if r >= pq {
-        Ok(surgery_above_pq(qp, r))
-    } else if r >= pq - 1 && r < pq {
-        Ok(surgery_above_pq_1(qp, r))
-    } else {
-        Ok(-2)
+        let result = surgery_above_pq(qp, r);
+        let non_loose = result.0;
+        let tight = result.1;
+        let non_thickenable = result.2;
+        let jumps = fractions_to_tuples(result.3);
+
+        let mut surgery = vec![];
+        surgery.push(non_loose);
+        surgery.push(tight);
+        surgery.push(non_thickenable);
+        Ok( surgery )
+    }  
+    /* else if r > pq - 1 && r < pq {
+        let result = surgery_above_pq_1(qp, r);
+        let non_loose = result.0;
+        let tight = result.1;
+        let non_thickenable = result.2;
+        let jumps = fractions_to_tuples(result.3);
+
+        let mut surgery = vec![];
+        surgery.push(non_loose);
+        surgery.push(tight);
+        surgery.push(non_thickenable);
+        Ok( surgery )
+    } */ 
+    else {
+        let result = surgery_below_pq(qp, r);
+        let non_loose = result.0;
+        let tight = result.1;
+        let non_thickenable = result.2;
+        let jumps = fractions_to_tuples(result.3);
+
+        let mut surgery = vec![];
+        surgery.push(non_loose);
+        surgery.push(tight);
+        surgery.push(non_thickenable);
+        Ok( surgery )
     }
 }
-
-
-

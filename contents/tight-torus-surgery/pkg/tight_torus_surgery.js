@@ -5,14 +5,16 @@
  * @param {bigint} q
  * @param {bigint} a
  * @param {bigint} b
- * @returns {bigint}
+ * @returns {BigInt64Array}
  */
 export function surgery(p, q, a, b) {
     const ret = wasm.surgery(p, q, a, b);
-    if (ret[2]) {
-        throw takeFromExternrefTable0(ret[1]);
+    if (ret[3]) {
+        throw takeFromExternrefTable0(ret[2]);
     }
-    return ret[0];
+    var v1 = getArrayI64FromWasm0(ret[0], ret[1]).slice();
+    wasm.__wbindgen_free(ret[0], ret[1] * 8, 8);
+    return v1;
 }
 function __wbg_get_imports() {
     const import0 = {
@@ -36,6 +38,19 @@ function __wbg_get_imports() {
         __proto__: null,
         "./tight_torus_surgery_bg.js": import0,
     };
+}
+
+function getArrayI64FromWasm0(ptr, len) {
+    ptr = ptr >>> 0;
+    return getBigInt64ArrayMemory0().subarray(ptr / 8, ptr / 8 + len);
+}
+
+let cachedBigInt64ArrayMemory0 = null;
+function getBigInt64ArrayMemory0() {
+    if (cachedBigInt64ArrayMemory0 === null || cachedBigInt64ArrayMemory0.byteLength === 0) {
+        cachedBigInt64ArrayMemory0 = new BigInt64Array(wasm.memory.buffer);
+    }
+    return cachedBigInt64ArrayMemory0;
 }
 
 function getStringFromWasm0(ptr, len) {
@@ -75,6 +90,7 @@ function __wbg_finalize_init(instance, module) {
     wasmInstance = instance;
     wasm = instance.exports;
     wasmModule = module;
+    cachedBigInt64ArrayMemory0 = null;
     cachedUint8ArrayMemory0 = null;
     wasm.__wbindgen_start();
     return wasm;
