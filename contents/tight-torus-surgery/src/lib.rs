@@ -803,15 +803,15 @@ fn surgery_below_pq(qp: Fraction, r: Fraction) -> (i64, i64, i64, Vec<Fraction>)
             non_loose = x_non_loose + v_non_loose; 
 
             if r.den != 1 {
-                let wings = non_loose - 2 * x_num;
-                return (wings * phi_s(r,Fraction::new(ceil,1)) + x_num * phi_inf(r), tight * phi_s(r,Fraction::new(ceil,1)), non_thickenable, jumps) 
+                let wings = non_loose - 2 * x_num - 2;          // count only wings, this is non-loose - X * 2 (/ and \) - 2 (V)
+                return (wings * phi_s(r,Fraction::new(ceil,1)) + x_num * phi_inf(r) + 2 * phi_inf(r), tight * phi_s(r,Fraction::new(ceil,1)), non_thickenable, jumps)  
             } else {
                 return (non_loose - x_num, tight, non_thickenable, jumps) 
             }
         } else if r < pq - p - q + 2 && r > pq - p - q {             // no V but should consider positive contact surgery 
             non_loose = x_non_loose;
             if r.den != 1 {
-                let wings = non_loose - 2 * x_num;
+                let wings = non_loose - 2 * x_num;          // count only wings, this is non-loose - X * 2 (/ and \) 
                 return (wings * phi_s(r,Fraction::new(ceil,1)) + x_num * phi_inf(r), tight * phi_s(r,Fraction::new(ceil,1)), non_thickenable, jumps) 
             } else {
                 return (non_loose - x_num + 1, tight, non_thickenable, jumps) 
