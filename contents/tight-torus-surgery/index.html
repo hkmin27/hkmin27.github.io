@@ -76,7 +76,7 @@
 
             const targetElement = document.getElementById('result');
             if (targetElement) {
-                targetElement.innerText = `(${p},${q})-torus knot, surgery coefficient: ${a}/${b}, tight contact structures: ${statusText}\n\t ${statusText_nonloose} from non_loose,\t ${statusText_tight} from tight,\t ${statusText_non_thickenable} from non_thickenable`;
+                targetElement.innerText = `(${p},${q})-torus knot, surgery coefficient: ${a}/${b}, tight contact structures: ${statusText}\n\t From non-loose: ${statusText_nonloose}.\t From tight: ${statusText_tight}.\t From non-thickenable: ${statusText_non_thickenable}.`;
             }
         } catch (e) {
             alert(e);
