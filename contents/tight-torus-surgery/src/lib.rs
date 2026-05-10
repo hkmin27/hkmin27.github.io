@@ -595,6 +595,25 @@ fn phi_s(r: Fraction, s: Fraction) -> i64 {
     phi_inf(Fraction::new(num, den)) 
 }
 
+fn pos_cont_surgery(r: Fraction) -> i64 {
+    let (a, b) = (r.num, r.den);
+    let k = Fraction::new(b, a).ceiling();
+
+    if a == 1 {
+        return 1
+    }
+
+    let neg_coeff = Fraction::new(a, b- a * k);
+    let cf = neg_coeff.to_cf(); 
+    let calculate = |terms: &[i64]| -> i64 {
+            let (first, rest) = terms.split_first()
+                .expect("The continued fraction is empty!");
+            rest.iter().map(|x| x.abs() - 1).product::<i64>() * first.abs()
+        };
+    let result = calculate(&cf.terms);
+    result
+}
+
 // tight contact structures
 // Theorem 1.2: r = a/b > pq
 fn surgery_above_pq(qp: Fraction, r: Fraction) -> (i64, i64, i64, Vec<Fraction>) {
@@ -804,15 +823,15 @@ fn surgery_below_pq(qp: Fraction, r: Fraction) -> (i64, i64, i64, Vec<Fraction>)
 
             if r.den != 1 {
                 let wings = non_loose - 2 * x_num - 2;          // count only wings, this is non-loose - X * 2 (/ and \) - 2 (V)
-                return (wings * phi_s(r,Fraction::new(ceil,1)) + x_num * phi_inf(r) + 2 * phi_inf(r), tight * phi_s(r,Fraction::new(ceil,1)), non_thickenable, jumps)  
+                return (wings * phi_s(r,Fraction::new(ceil,1)) + x_num * phi_inf(r) + 2 * phi_inf(r), tight * phi_s(r,Fraction::new(ceil,1)), non_thickenable, jumps) 
             } else {
                 return (non_loose - x_num, tight, non_thickenable, jumps) 
             }
         } else if r < pq - p - q + 2 && r > pq - p - q {             // no V but should consider positive contact surgery 
             non_loose = x_non_loose;
             if r.den != 1 {
-                let wings = non_loose - 2 * x_num;          // count only wings, this is non-loose - X * 2 (/ and \) 
-                return (wings * phi_s(r,Fraction::new(ceil,1)) + x_num * phi_inf(r), tight * phi_s(r,Fraction::new(ceil,1)), non_thickenable, jumps) 
+                let wings = non_loose - 2 * x_num;              // count only wings, this is non-loose - X * 2 (/ and \) 
+                return (wings * phi_s(r,Fraction::new(ceil,1)) + x_num * phi_inf(r) + pos_cont_surgery(Fraction::new(a - b * (pq - p - q),b)), tight * phi_s(r,Fraction::new(ceil,1)), non_thickenable, jumps) 
             } else {
                 return (non_loose - x_num + 1, tight, non_thickenable, jumps) 
             }
