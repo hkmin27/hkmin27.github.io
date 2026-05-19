@@ -6,7 +6,6 @@ use crate::utils::*;
 
 pub mod continued_fraction;
 pub mod fraction;
-pub mod lens_spaces;
 pub mod torus_surgery;
 pub mod utils;
 
