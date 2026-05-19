@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Tight torus surgery calculator</title>
+<style>
+    .input-group { margin-bottom: 10px; }
+    input { width: 60px; padding: 5px; }
+</style>
+</head>
+
+<body>
+<h3>&nbsp;Tight torus knot surgery calculator </h1>
+<p>&nbsp; (p,q) must be relatively prime</h1>
+
+<div class="input-group">
+    <div class="input-group">
+        <label for="n1">&nbsp; p &nbsp;</label>
+        <input type="number" id="p" value="0">
+    </div>
+    <div class="input-group">
+        <label for="n2">&nbsp; q &nbsp;</label>
+        <input type="number" id="q" value="0">
+    </div>
+    <div class="input-group">
+        <label for="n3">&nbsp; a &nbsp;</label>
+        <input type="number" id="a" value="0">
+    </div>
+    <div class="input-group">
+        <label for="n4">&nbsp; b &nbsp;</label>
+        <input type="number" id="b" value="0">
+    </div>
+</div>
+
+&nbsp;
+<button id="calc-btn"> Calculate </button>
+
+<p>&nbsp; result: <span id="result"> 0 </span></p>
+<script type="module">
+    import init, { tight_torus_surgery } from './pkg/tight_torus_surgery.js';
+
+    async function run() {
+        await init();
+
+        const btn = document.getElementById('calc-btn');
+
+        btn.onclick = () => {
+        try {
+            // convert the inputs to BigInt
+            const p = BigInt(document.getElementById('p').value);
+            const q = BigInt(document.getElementById('q').value);
+            const a = BigInt(document.getElementById('a').value);
+            const b = BigInt(document.getElementById('b').value);
+
+            const result = tight_torus_surgery(p, q, a, b);
+            const non_loose = result[0];
+            const tight = result[1];
+            const non_thickenable = result[2];
+            const surgeries = non_loose + tight + non_thickenable;
+
+            const e0 = result[3];
+            const r1_num = result[4];
+            const r1_den = result[5];
+            const r2_num = result[6];
+            const r2_den = result[7];
+            const r3_num = result[8];
+            const r3_den = result[9];
+
+            const neg_twisting = result[10];
+            const zero_twisting = result[11];
+
+            let statusText = "";
+            let statusText_nonloose ="";
+            let statusText_tight ="";
+            let statusText_non_thickenable ="";
+            if (surgeries === -1n) {
+                statusText = "infinity";
+            } else if (surgeries < 0n) {
+                statusText = "not implemented yet!";
+            } else {
+                statusText = surgeries.toString(); 
+                statusText_nonloose = non_loose.toString();
+                statusText_tight = tight.toString();
+                statusText_non_thickenable = non_thickenable.toString();
+            }
+
+            const targetElement = document.getElementById('result');
+            if (targetElement) {
+                targetElement.innerText = `(${p},${q})-torus knot, surgery coefficient: ${a}/${b}, tight contact structures: ${statusText}\n\t From non-loose: ${statusText_nonloose}.\t From tight: ${statusText_tight}.\t From non-thickenable: ${statusText_non_thickenable}.
+                \nnormalized Seifert fibration: M(${e0}, ${r1_num}/${r1_den}, ${r2_num}/${r2_den}, ${r3_num}/${r3_den})
+                negative twisting: ${neg_twisting}, zero twisting: ${zero_twisting}
+                `;
+            }
+        } catch (e) {
+            alert(e);
+        }
+        };
+    }
+
+    run();
+</script>
+</body>
+</html>
