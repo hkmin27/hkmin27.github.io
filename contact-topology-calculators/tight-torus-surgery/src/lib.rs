@@ -54,8 +54,11 @@ pub fn tight_torus_surgery(p: i64, q: i64, a: i64, b: i64) -> Result<Vec<i64>, J
         let tight = result.1;
         let non_thickenable = result.2;
 
-        let neg_twisting = non_loose;
-        let zero_twisting = 0;
+        let mut neg_twisting;
+        let mut zero_twisting;
+        
+        neg_twisting = non_loose + tight + non_thickenable;
+        zero_twisting = 0;
 
         let mut surgery = vec![];
         surgery.push(non_loose);
@@ -114,18 +117,18 @@ pub fn tight_torus_surgery(p: i64, q: i64, a: i64, b: i64) -> Result<Vec<i64>, J
         }
 
         let mut surgery = vec![];
-        surgery.push(non_loose);
-        surgery.push(tight);
-        surgery.push(non_thickenable);
-        surgery.push(e_0);
-        surgery.push(r1.num);
-        surgery.push(r1.den);
-        surgery.push(r2.num);
-        surgery.push(r2.den);
-        surgery.push(r3.num);
-        surgery.push(r3.den);
-        surgery.push(neg_twisting);
-        surgery.push(zero_twisting);
+        surgery.push(non_loose);                // 0
+        surgery.push(tight);                    // 1    
+        surgery.push(non_thickenable);          // 2
+        surgery.push(e_0);                      // 3
+        surgery.push(r1.num);                   // 4
+        surgery.push(r1.den);                   // 5
+        surgery.push(r2.num);                   // 6
+        surgery.push(r2.den);                   // 7
+        surgery.push(r3.num);                  // 8
+        surgery.push(r3.den);                 // 9
+        surgery.push(neg_twisting);             // 10
+        surgery.push(zero_twisting);            // 11
         Ok( surgery )
     }
 }
