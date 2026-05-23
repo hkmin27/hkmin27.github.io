@@ -2,103 +2,150 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<title>Tight torus surgery calculator</title>
-<style>
-    .input-group { margin-bottom: 10px; }
-    input { width: 60px; padding: 5px; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tight Torus Surgery Calculator</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body { background-color: #f8f9fa; }
+        .result-box {
+            background-color: #ffffff;
+            border-left: 4px solid #212529; /* 검은색 버튼에 맞춰 테두리 포인트도 다크하게 변경 */
+        }
+        .input-label { font-family: monospace; font-size: 1.1rem; }
+        /* 결과창 텍스트 줄간격 최적화 */
+        #result { line-height: 1.6; }
+        #result ul { margin-bottom: 0.5rem; padding-left: 1.5rem; }
+    </style>
 </head>
 
-<body>
-<h3>&nbsp;Tight torus knot surgery calculator </h1>
-<p>&nbsp; (p,q) must be relatively prime</h1>
+<body class="py-5">
+    <div class="container" style="max-width: 600px;">
+        
+        <div class="mb-4">
+            <h2 class="fw-bold">Tight Torus Surgery Calculator</h2>
+            <p class="text-secondary small">Note: (p, q) must be relatively prime. a/b is the surgery coefficient.</p>
+            <hr>
+        </div>
 
-<div class="input-group">
-    <div class="input-group">
-        <label for="n1">&nbsp; p &nbsp;</label>
-        <input type="number" id="p" value="0">
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body p-4">
+                <div class="row g-3 mb-4">
+                    <div class="col-3">
+                        <label for="p" class="form-label input-label">p</label>
+                        <input type="number" id="p" class="form-control" value="0">
+                    </div>
+                    <div class="col-3">
+                        <label for="q" class="form-label input-label">q</label>
+                        <input type="number" id="q" class="form-control" value="0">
+                    </div>
+                    <div class="col-3">
+                        <label for="a" class="form-label input-label">a</label>
+                        <input type="number" id="a" class="form-control" value="0">
+                    </div>
+                    <div class="col-3">
+                        <label for="b" class="form-label input-label">b</label>
+                        <input type="number" id="b" class="form-control" value="0">
+                    </div>
+                </div>
+                <button id="calc-btn" class="btn btn-dark w-100 py-2 fw-bold">Calculate</button>
+            </div>
+        </div>
+        
+        <div class="result-box p-4 border shadow-sm rounded">
+            <h6 class="fw-bold text-secondary mb-3">Result</h6>
+            <div id="result" class="font-monospace text-break" style="font-size: 0.95rem;">0</div>
+        </div>
+        
     </div>
-    <div class="input-group">
-        <label for="n2">&nbsp; q &nbsp;</label>
-        <input type="number" id="q" value="0">
-    </div>
-    <div class="input-group">
-        <label for="n3">&nbsp; a &nbsp;</label>
-        <input type="number" id="a" value="0">
-    </div>
-    <div class="input-group">
-        <label for="n4">&nbsp; b &nbsp;</label>
-        <input type="number" id="b" value="0">
-    </div>
-</div>
 
-&nbsp;
-<button id="calc-btn"> Calculate </button>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<p>&nbsp; result: <span id="result"> 0 </span></p>
-<script type="module">
-    import init, { tight_torus_surgery } from './pkg/tight_torus_surgery.js';
+    <script type="module">
+        import init, { tight_torus_surgery } from './pkg/tight_torus_surgery.js';
 
-    async function run() {
-        await init();
+        async function run() {
+            await init();
 
-        const btn = document.getElementById('calc-btn');
+            const btn = document.getElementById('calc-btn');
 
-        btn.onclick = () => {
-        try {
-            // convert the inputs to BigInt
-            const p = BigInt(document.getElementById('p').value);
-            const q = BigInt(document.getElementById('q').value);
-            const a = BigInt(document.getElementById('a').value);
-            const b = BigInt(document.getElementById('b').value);
+            // 💡 엔터키 입력 이벤트 추가 (아무 입력칸에서나 엔터 치면 버튼 클릭됨)
+            const inputs = document.querySelectorAll('.form-control');
+            inputs.forEach(input => {
+                input.addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault(); // 폼 기본 제출 방지
+                        btn.click(); // 계산 버튼 강제 클릭
+                    }
+                });
+            });
 
-            const result = tight_torus_surgery(p, q, a, b);
-            const non_loose = result[0];
-            const tight = result[1];
-            const non_thickenable = result[2];
-            const surgeries = non_loose + tight + non_thickenable;
+            btn.onclick = () => {
+            try {
+                // convert the inputs to BigInt
+                const p = BigInt(document.getElementById('p').value);
+                const q = BigInt(document.getElementById('q').value);
+                const a = BigInt(document.getElementById('a').value);
+                const b = BigInt(document.getElementById('b').value);
 
-            const e0 = result[3];
-            const r1_num = result[4];
-            const r1_den = result[5];
-            const r2_num = result[6];
-            const r2_den = result[7];
-            const r3_num = result[8];
-            const r3_den = result[9];
+                const result = tight_torus_surgery(p, q, a, b);
+                const non_loose = result[0];
+                const tight = result[1];
+                const non_thickenable = result[2];
+                const surgeries = non_loose + tight + non_thickenable;
 
-            const neg_twisting = result[10];
-            const zero_twisting = result[11];
+                const e0 = result[3];
+                const r1_num = result[4];
+                const r1_den = result[5];
+                const r2_num = result[6];
+                const r2_den = result[7];
+                const r3_num = result[8];
+                const r3_den = result[9];
 
-            let statusText = "";
-            let statusText_nonloose ="";
-            let statusText_tight ="";
-            let statusText_non_thickenable ="";
-            if (surgeries === -1n) {
-                statusText = "infinity";
-            } else if (surgeries < 0n) {
-                statusText = "not implemented yet!";
-            } else {
-                statusText = surgeries.toString(); 
-                statusText_nonloose = non_loose.toString();
-                statusText_tight = tight.toString();
-                statusText_non_thickenable = non_thickenable.toString();
+                const neg_twisting = result[10];
+                const zero_twisting = result[11];
+
+                let statusText = "";
+                let statusText_nonloose ="";
+                let statusText_tight ="";
+                let statusText_non_thickenable ="";
+                
+                if (surgeries === -1n) {
+                    statusText = "infinity";
+                } else if (surgeries < 0n) {
+                    statusText = "not implemented yet!";
+                } else {
+                    statusText = surgeries.toString(); 
+                    statusText_nonloose = non_loose.toString();
+                    statusText_tight = tight.toString();
+                    statusText_non_thickenable = non_thickenable.toString();
+                }
+
+                const targetElement = document.getElementById('result');
+                if (targetElement) {
+                    // 💡 innerText 대신 innerHTML을 사용하여 깔끔하게 리스트로 정렬
+                    targetElement.innerHTML = `
+                        <strong>(${p},${q})-torus knot</strong>, surgery coefficient: <strong>${a}/${b}</strong><br>
+                        Tight contact structures: <strong>${statusText}</strong>
+                        <ul>
+                            <li>From non-loose: ${statusText_nonloose}</li>
+                            <li>From tight: ${statusText_tight}</li>
+                            <li>From non-thickenable: ${statusText_non_thickenable}</li>
+                        </ul>
+                        Normalized Seifert fibration: M(${e0}; ${r1_num}/${r1_den}, ${r2_num}/${r2_den}, ${r3_num}/${r3_den})<br>
+                        Negative twisting: ${neg_twisting}, Zero twisting: ${zero_twisting}
+                    `;
+                }
+            } catch (e) {
+                alert(e);
             }
-
-            const targetElement = document.getElementById('result');
-            if (targetElement) {
-                targetElement.innerText = `(${p},${q})-torus knot, surgery coefficient: ${a}/${b}, tight contact structures: ${statusText}\n\t From non-loose: ${statusText_nonloose}.\t From tight: ${statusText_tight}.\t From non-thickenable: ${statusText_non_thickenable}.
-                \nnormalized Seifert fibration: M(${e0}; ${r1_num}/${r1_den}, ${r2_num}/${r2_den}, ${r3_num}/${r3_den})
-                negative twisting: ${neg_twisting}, zero twisting: ${zero_twisting}
-                `;
-            }
-        } catch (e) {
-            alert(e);
+            };
         }
-        };
-    }
 
-    run();
-</script>
+        run();
+    </script>
 </body>
+
 </html>
