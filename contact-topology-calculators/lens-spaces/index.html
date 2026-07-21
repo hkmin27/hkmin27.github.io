@@ -82,7 +82,8 @@
                     const result = tight_lens_spaces(p, q);
 
                     let statusText = "";
-                    
+                    statusText = result.toString();
+
                     const targetElement = document.getElementById('result');
                     if (targetElement) {
                         targetElement.innerHTML = `
