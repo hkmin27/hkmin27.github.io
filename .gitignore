@@ -1,5 +1,2 @@
-**/.DS_Store
-contents/gre/problems/*.tex
-contents/gre/problems/*.synctex.gz
 contents/cv/**
 !contents/cv/cv.pdf
