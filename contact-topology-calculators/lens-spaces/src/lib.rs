@@ -24,6 +24,11 @@ pub trait Manifold {
 
 #[wasm_bindgen]
 pub fn tight_lens_spaces(p: i64, q: i64) -> Result<i64, JsValue> {
+    if p == 0 && q ==0 {
+        let msg = format!("Enter relatively prime numbers p and q!");
+        return Err(JsValue::from_str(&msg));
+    }
+
    if p == 0 {
         // L(0, q) is diffeomorphic to S^1 x S^2
         return Ok(1);
