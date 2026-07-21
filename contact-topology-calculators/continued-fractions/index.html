@@ -54,7 +54,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script type="module">
-        import init, { continued_fraction } from './pkg/continued_fractions.js';
+        import init, { continued_fractions } from './pkg/continued_fractions.js';
 
         async function run() {
             await init();
@@ -78,8 +78,8 @@
                     const p = BigInt(document.getElementById('p').value);
                     const q = BigInt(document.getElementById('q').value);
 
-                    // 2. continued_fraction 호출 (결과는 BigInt64Array 또는 Array 형태로 리턴됨)
-                    const vec = continued_fraction(p, q);
+                    // 2. continued_fractions 호출 (결과는 BigInt64Array 또는 Array 형태로 리턴됨)
+                    const vec = continued_fractions(p, q);
 
                     // 3. Vector 요소를 콤마와 공백으로 엮어서 포맷팅
                     const formattedVector = Array.from(vec).join(', ');
